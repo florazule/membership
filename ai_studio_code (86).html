@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florazula | VIP Membership</title>
+    
+    <!-- Ultra-Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === PREMIUM VARIABLES === */
+        :root {
+            --bg-deep: #030305;
+            --pink-solid: #FFA6C9;
+            --pink-dim: rgba(255, 166, 201, 0.6);
+            --pink-glow: rgba(255, 166, 201, 0.15);
+            --text-main: #fcfcfc;
+            --text-muted: #9a9a9f;
+            --line-thin: 1px solid rgba(255, 166, 201, 0.2);
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Outfit', sans-serif;
+        }
+
+        /* === RESET & BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Luxury Glows */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%; left: -10%;
+            width: 70vw; height: 70vw;
+            background: radial-gradient(circle, var(--pink-glow) 0%, transparent 60%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -2;
+            animation: drift 20s infinite alternate ease-in-out;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%; right: -10%;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(255,166,201,0.08) 0%, transparent 60%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -2;
+            animation: drift 15s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 30px); }
+        }
+
+        /* Film Grain Texture */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        a { color: var(--pink-solid); text-decoration: none; transition: 0.3s; }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px; /* Added more top padding since image is gone */
+            position: relative;
+        }
+
+        /* === TYPOGRAPHY === */
+        h1, h2, h3, .serif {
+            font-family: var(--font-serif);
+            font-weight: 500;
+        }
+        
+        .title-display {
+            font-size: 3rem;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, var(--pink-solid));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--pink-dim);
+            margin-bottom: 60px;
+        }
+
+        /* === EDITORIAL TABS (Lang & Pricing) === */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--pink-solid);
+            transition: width 0.4s ease;
+        }
+        .tab-btn.active {
+            color: var(--pink-solid);
+            font-style: italic;
+        }
+        .tab-btn.active::after { width: 100%; }
+
+        .price-tabs {
+            margin-top: 60px;
+            gap: 30px;
+            border-bottom: none;
+        }
+        .price-tabs .tab-btn {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .price-tabs .tab-btn::after { bottom: -8px; }
+
+        /* === BUTTONS === */
+        .btn-luxury {
+            display: inline-block;
+            border: 1px solid var(--pink-dim);
+            color: var(--pink-solid);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 16px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .btn-luxury:hover {
+            background: var(--pink-solid);
+            color: var(--bg-deep);
+            box-shadow: 0 0 30px var(--pink-glow);
+        }
+        .center-btn { display: flex; justify-content: center; margin: 30px 0; }
+
+        /* === CONTENT VIEWS === */
+        .view-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .view-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === BENTO GRID (Benefits) === */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .bento-box {
+            border: var(--line-thin);
+            background: rgba(10, 10, 12, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s ease;
+        }
+        .bento-box:hover {
+            border-color: var(--pink-dim);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+        /* Corner Accents */
+        .bento-box::before, .bento-box::after {
+            content: '';
+            position: absolute;
+            width: 15px; height: 15px;
+            border: 1px solid var(--pink-solid);
+            opacity: 0.5;
+            transition: 0.4s;
+        }
+        .bento-box::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .bento-box::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+        .bento-box:hover::before, .bento-box:hover::after { width: 25px; height: 25px; opacity: 1; }
+
+        .bento-num {
+            position: absolute;
+            top: -15px;
+            right: 10px;
+            font-family: var(--font-serif);
+            font-size: 6rem;
+            color: rgba(255, 166, 201, 0.05);
+            line-height: 1;
+            z-index: -1;
+        }
+        .bento-title {
+            font-family: var(--font-serif);
+            color: var(--pink-solid);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .bento-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* === IDN SPECIFIC (Steps) === */
+        .steps-container {
+            border-left: 1px solid var(--pink-dim);
+            padding-left: 30px;
+            margin: 40px 0;
+        }
+        .step-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .step-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 8px;
+            width: 7px;
+            height: 7px;
+            background: var(--pink-solid);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--pink-solid);
+        }
+        .step-item p { font-size: 0.95rem; color: var(--text-muted); }
+
+        /* === PRICING MENU STYLE === */
+        .price-badge-wrapper {
+            text-align: center;
+            margin: 60px 0;
+        }
+        .price-badge-wrapper .label {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .price-badge-wrapper .amount {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            color: var(--pink-solid);
+            line-height: 1;
+            text-shadow: 0 0 30px var(--pink-glow);
+        }
+        .price-badge-wrapper .period {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* Title Inside Box */
+        .menu-category {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            text-align: center;
+            margin: 0 0 30px 0; /* Changed to sit cleanly at top of box */
+            position: relative;
+        }
+        .menu-category::after {
+            content: '✦';
+            display: block;
+            font-size: 0.8rem;
+            color: var(--pink-solid);
+            margin-top: 10px;
+        }
+
+        .menu-box {
+            border: var(--line-thin);
+            padding: 40px;
+            background: rgba(255,255,255,0.01);
+            position: relative;
+            margin-bottom: 40px; /* Space between boxes */
+        }
+        
+        /* Dotted menu items */
+        .menu-item {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 15px;
+        }
+        .menu-name {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .menu-dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted rgba(255, 166, 201, 0.3);
+            margin: 0 15px;
+            position: relative;
+            top: -4px;
+        }
+        .menu-price {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--pink-solid);
+        }
+
+        /* Commission Sub-items */
+        .komis-base {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: var(--line-thin);
+        }
+        .komis-base span { font-size: 0.75rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;}
+        .komis-base .price { font-family: var(--font-serif); font-size: 3rem; color: var(--text-main); line-height: 1.2;}
+        .member-active .komis-base .price { color: var(--pink-solid); }
+        .komis-base .desc { font-style: italic; font-family: var(--font-serif); color: var(--text-muted); }
+
+        .add-on-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--pink-solid);
+            margin-bottom: 15px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* === RULES SECTION === */
+        .rule-notice {
+            margin: 60px auto 40px auto;
+            text-align: center;
+            border: 1px solid var(--pink-dim);
+            padding: 45px 30px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+            max-width: 600px;
+        }
+        .rule-text {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+        .rule-text span {
+            color: var(--pink-solid);
+            font-style: italic;
+        }
+
+        /* === OUTRO & FOOTER === */
+        .outro-box {
+            margin-top: 40px;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .outro-box h3 {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            color: var(--text-main);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+        }
+        .sparkle-row {
+            color: var(--pink-solid);
+            font-size: 0.8rem;
+            letter-spacing: 25px;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+        footer p {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-style: italic;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        .heart-anim {
+            display: inline-block;
+            color: var(--pink-solid);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); text-shadow: 0 0 10px var(--pink-solid); }
+        }
+        .brand-mark {
+            margin-top: 30px;
+            font-size: 0.65rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .title-display { font-size: 2.2rem; }
+            .price-badge-wrapper .amount { font-size: 3rem; }
+            .menu-box { padding: 30px 20px; }
+            .rule-notice { padding: 30px 20px; }
+        }
+        
+        /* Reveal Anim */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<div class="container">
+    
+    <h1 class="title-display reveal">Florazula</h1>
+    <p class="subtitle reveal">VIP Membership</p>
+
+    <!-- MASTER LANGUAGE NAV -->
+    <div class="tab-nav reveal">
+        <button class="tab-btn active" onclick="switchLang('eng')">ENG</button>
+        <button class="tab-btn" onclick="switchLang('idn')">IDN</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ENGLISH SECTION -->
+    <!-- ========================================== -->
+    <div id="eng-section" class="view-section active">
+        
+        <div class="center-btn reveal" style="margin-bottom: 60px;">
+            <a href="https://www.patreon.com/cw/florazula" target="_blank" class="btn-luxury">Access Patreon</a>
+        </div>
+
+        <h2 class="menu-category reveal" style="margin-top: 20px; font-size: 1.8rem;">Membership Benefits</h2>
+        <p class="reveal" style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 40px; font-style: italic;">Exclusive access. One curated tier.</p>
+
+        <div class="bento-grid reveal">
+            <div class="bento-box">
+                <div class="bento-num">01</div>
+                <h3 class="bento-title">Exclusive Content</h3>
+                <p class="bento-desc">3 ALTs (+ pages of socmed aus). Bonus scenarios for each bot I released (except commission & collab ones).</p>
+            </div>
+            <div class="bento-box">
+                <div class="bento-num">02</div>
+                <h3 class="bento-title">Discount Codes</h3>
+                <p class="bento-desc">60% off kofi alts and ebook and 30% off commissions & css template.</p>
+            </div>
+            <div class="bento-box">
+                <div class="bento-num">03</div>
+                <h3 class="bento-title">VIP Access</h3>
+                <p class="bento-desc">Early soon-to-be public Bot Access and Private Discord Channel Access. Yapyap together and random lores.</p>
+            </div>
+            <div class="bento-box">
+                <div class="bento-num">04</div>
+                <h3 class="bento-title">Voting Rights</h3>
+                <p class="bento-desc">A right to vote for the next membership lineup and upcoming projects.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- INDONESIAN SECTION -->
+    <!-- ========================================== -->
+    <div id="idn-section" class="view-section">
+        
+        <p class="reveal" style="text-align: center; font-size: 0.95rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.8;">
+            Membership ini sifatnya <strong>'manual'</strong>. Kamu bisa bayar perbulan, gausah khawatir kapan, boleh awal, pertengahan, atau akhir bulan. Boleh juga cancel/ga lanjut untuk bulan selanjutnya. Cukup DM untuk kejelasan.
+        </p>
+
+        <div class="center-btn reveal" style="margin-bottom: 60px;">
+            <a href="https://discordapp.com/users/1176132545981714473" target="_blank" class="btn-luxury">DM Discord Disini</a>
+        </div>
+
+        <!-- CARA MEMBERSHIP -->
+        <h2 class="menu-category reveal" style="font-size: 1.8rem;">Cara Membership</h2>
+        <div class="steps-container reveal">
+            <div class="step-item">
+                <p>DM Discordku. Bisa tanya-tanya dulu sebelum memutuskan untuk gabung.</p>
+            </div>
+            <div class="step-item">
+                <p>Kalau sudah, transaksi dimulai. Aku bakal arahin kamu untuk verifikasi ke server, langkah ini penting agar kamu bisa menikmati benefitnya.</p>
+            </div>
+            <div class="step-item">
+                <p>Verifikasi adalah keharusan; dengan foto berisi KTP yang sudah diblur semua kecuali tanggal lahir, lalu disamping KTP ada secarik kertas bertuliskan username discord dan tanggal kamu join.</p>
+            </div>
+            <div class="step-item">
+                <p>Aku bakal kasih role khusus membership agar kamu bisa akses channel VIP yang ada semua benefit yang aku sebutkan.</p>
+            </div>
+        </div>
+
+        <!-- BENEFIT MEMBERSHIP -->
+        <h2 class="menu-category reveal" style="font-size: 1.8rem; margin-top: 60px;">Benefit Membership</h2>
+        <div class="bento-grid reveal">
+            <div class="bento-box">
+                <div class="bento-num">01</div>
+                <h3 class="bento-title">Exclusive Alt</h3>
+                <p class="bento-desc">Mendapatkan 3 exclusive ALT perbulannya.</p>
+            </div>
+            <div class="bento-box">
+                <div class="bento-num">02</div>
+                <h3 class="bento-title">Diskon Khusus</h3>
+                <p class="bento-desc">Diskon spesial untuk pembelian di Kofi Shop dan Komisi.</p>
+            </div>
+            <div class="bento-box">
+                <div class="bento-num">03</div>
+                <h3 class="bento-title">VIP Akses</h3>
+                <p class="bento-desc">Bisa akses lebih awal bot yg mau aku rilis, serta akses channel membershipku di Discord.</p>
+            </div>
+            <div class="bento-box">
+                <div class="bento-num">04</div>
+                <h3 class="bento-title">Hak Voting</h3>
+                <p class="bento-desc">Hak voting untuk penentuan lineup membership selanjutnya.</p>
+            </div>
+        </div>
+
+        <!-- HARGA BADGE -->
+        <div class="price-badge-wrapper reveal">
+            <span class="label">Harga Membership</span>
+            <div class="amount">50 Ribu</div>
+            <span class="period">perbulan</span>
+        </div>
+
+        <!-- PRICING TABS -->
+        <div class="tab-nav price-tabs reveal" id="tier-tabs">
+            <button class="tab-btn active" onclick="switchTier('normal')">Tanpa Membership</button>
+            <button class="tab-btn" onclick="switchTier('member')">Dengan Membership</button>
+        </div>
+
+        <!-- PRICING VIEWS WRAPPER -->
+        <div id="pricing-wrapper" style="transition: opacity 0.3s ease;">
+            
+            <!-- KOFI SHOP -->
+            <div class="menu-box reveal">
+                <h3 class="menu-category">Kofi Shop</h3>
+                <div class="menu-item">
+                    <span class="menu-name">ALT</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-alt">50K</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-name">EBOOK</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-ebook">40K</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-name">BUNDLE</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-bundle">180K</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-name">CSS</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-css">300K</span>
+                </div>
+            </div>
+
+            <!-- KOMISI: ALT -->
+            <div class="menu-box reveal" id="box-komis-alt">
+                <h3 class="menu-category">Komisi: Alt</h3>
+                <div class="komis-base">
+                    <span>Base Price</span><br>
+                    <div class="price tier-komis-alt-base">150K</div>
+                    <div class="desc">(1 ALT dg 1 intro)</div>
+                </div>
+                <div class="add-on-title">Kalo Mau Nambah:</div>
+                <div class="menu-item">
+                    <span class="menu-name">+1 Intro</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-alt-add1">15K</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-name">Beda Setting/Background</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-alt-add2">25K</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-name">+1 Char (Multibot)</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-alt-add3">35K</span>
+                </div>
+            </div>
+
+            <!-- KOMISI: NEW BOT -->
+            <div class="menu-box reveal" id="box-komis-new">
+                <h3 class="menu-category">Komisi: New Bot</h3>
+                <div class="komis-base">
+                    <span>Base Price</span><br>
+                    <div class="price tier-komis-new-base">225K</div>
+                    <div class="desc">(1 whole bot, 1 intro, no lorebook)</div>
+                </div>
+                <div class="add-on-title">Kalo Mau Nambah:</div>
+                <div class="menu-item">
+                    <span class="menu-name">+1 Intro</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-new-add1">15K</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-name">Dilengkapi Lorebook</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-new-add2">25K</span>
+                </div>
+                <div class="menu-item">
+                    <span class="menu-name">+1 Char (Multibot)</span>
+                    <div class="menu-dots"></div>
+                    <span class="menu-price tier-new-add3">60K</span>
+                </div>
+            </div>
+
+        </div> <!-- End Pricing Wrapper -->
+
+        <!-- RULES SECTION -->
+        <div class="rule-notice reveal">
+            <p class="rule-text">Bagi yang mau komis, <span>harus cek rules di sini</span></p>
+            <div class="center-btn" style="margin: 0;">
+                <a href="https://payhip.com/b/srhVG" target="_blank" class="btn-luxury">Cek Rules</a>
+            </div>
+        </div>
+
+        <!-- OUTRO -->
+        <div class="outro-box reveal">
+            <h3 class="serif">Mau komisi / beli alts lama / ebook tanpa membership? Boleh!</h3>
+            <div class="center-btn" style="margin: 30px 0;">
+                <a href="https://payhip.com/FLORAZULA" target="_blank" class="btn-luxury">Kunjungi Payhip</a>
+            </div>
+            <p style="font-family: var(--font-serif); color: var(--pink-solid); font-size: 1.2rem; font-style: italic; letter-spacing: 1px;">
+                Lalu DM ke Discordku!
+            </p>
+        </div>
+
+    </div> <!-- End IDN Section -->
+
+    <!-- FANCY FOOTER -->
+    <footer class="reveal">
+        <div class="sparkle-row">✦ ✦ ✦</div>
+        <p>Thanks for your support <span class="heart-anim">🩷</span></p>
+        <div class="brand-mark">Florazula</div>
+    </footer>
+
+</div>
+
+<script>
+    // --- SCROLL REVEAL ANIMATION ---
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
+
+
+    // --- LANGUAGE SWITCHING ---
+    function switchLang(lang) {
+        // Update nav buttons
+        const langBtns = document.querySelectorAll('.tab-nav:not(.price-tabs) .tab-btn');
+        langBtns.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Hide both sections first
+        const eng = document.getElementById('eng-section');
+        const idn = document.getElementById('idn-section');
+        
+        eng.classList.remove('active');
+        idn.classList.remove('active');
+
+        // Small delay to allow fade out, then show new content
+        setTimeout(() => {
+            if(lang === 'eng') {
+                eng.classList.add('active');
+            } else {
+                idn.classList.add('active');
+            }
+        }, 100);
+    }
+
+
+    // --- PRICING DATA & LOGIC ---
+    // Instead of duplicating HTML, we use a clean data object to update the DOM
+    const pricingData = {
+        normal: {
+            alt: "50K", ebook: "40K", bundle: "180K", css: "300K",
+            komisAltBase: "150K", altAdd1: "15K", altAdd2: "25K", altAdd3: "35K",
+            komisNewBase: "225K", newAdd1: "15K", newAdd2: "25K", newAdd3: "60K"
+        },
+        member: {
+            alt: "20K", ebook: "15K", bundle: "90K", css: "150K",
+            komisAltBase: "100K", altAdd1: "10K", altAdd2: "20K", altAdd3: "30K",
+            komisNewBase: "175K", newAdd1: "10K", newAdd2: "20K", newAdd3: "50K"
+        }
+    };
+
+    function switchTier(tier) {
+        // Update buttons
+        const tierBtns = document.querySelectorAll('#tier-tabs .tab-btn');
+        tierBtns.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Add/Remove class for styling base price color
+        const wrapper = document.getElementById('pricing-wrapper');
+        const boxes = document.querySelectorAll('.menu-box');
+        
+        if(tier === 'member') {
+            boxes.forEach(b => b.classList.add('member-active'));
+        } else {
+            boxes.forEach(b => b.classList.remove('member-active'));
+        }
+
+        // Apply data with a tiny fade effect
+        wrapper.style.opacity = 0;
+        
+        setTimeout(() => {
+            document.querySelector('.tier-alt').innerText = pricingData[tier].alt;
+            document.querySelector('.tier-ebook').innerText = pricingData[tier].ebook;
+            document.querySelector('.tier-bundle').innerText = pricingData[tier].bundle;
+            document.querySelector('.tier-css').innerText = pricingData[tier].css;
+
+            document.querySelector('.tier-komis-alt-base').innerText = pricingData[tier].komisAltBase;
+            document.querySelector('.tier-alt-add1').innerText = pricingData[tier].altAdd1;
+            document.querySelector('.tier-alt-add2').innerText = pricingData[tier].altAdd2;
+            document.querySelector('.tier-alt-add3').innerText = pricingData[tier].altAdd3;
+
+            document.querySelector('.tier-komis-new-base').innerText = pricingData[tier].komisNewBase;
+            document.querySelector('.tier-new-add1').innerText = pricingData[tier].newAdd1;
+            document.querySelector('.tier-new-add2').innerText = pricingData[tier].newAdd2;
+            document.querySelector('.tier-new-add3').innerText = pricingData[tier].newAdd3;
+            
+            wrapper.style.opacity = 1;
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
